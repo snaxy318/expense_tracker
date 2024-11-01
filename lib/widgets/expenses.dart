@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'models/expense.dart';
-import 'expenses_list.dart';
+import '../models/expense.dart';
+import 'expenses_list/expenses_list.dart';
 
 class Expenses extends StatefulWidget {
   const Expenses({super.key});
@@ -20,10 +20,11 @@ class _ExpesesState extends State<Expenses> {
       category: Categories.work,
     ),
     Expense(
-        title: 'Movie',
-        amount: 15.69,
-        date: DateTime.now(),
-        category: Categories.leisure,),
+      title: 'Movie',
+      amount: 15.69,
+      date: DateTime.now(),
+      category: Categories.leisure,
+    ),
   ];
   @override
   Widget build(BuildContext context) {
