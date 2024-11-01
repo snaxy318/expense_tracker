@@ -8,8 +8,16 @@ class ExpensesItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context){
-    return Card(
-      child: Text(expense.title),
+    return Padding(
+      padding:(
+        const EdgeInsets.symmetric(
+          horizontal: 20,
+          vertical: 16
+        )
+      ),
+      child: Card(
+        child: Text(expense.title),
+      ),
     );
   }
 }
