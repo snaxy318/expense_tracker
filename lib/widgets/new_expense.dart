@@ -9,9 +9,21 @@ class NewExpense extends StatefulWidget {
   }
 }
 
-class _NewExpenseState extends  State<NewExpense> {
+class _NewExpenseState extends State<NewExpense> {
   @override
   Widget build(BuildContext context) {
-    return Text("Hello");
+    return const Padding(
+      padding: EdgeInsets.all(16),
+      child: Column(
+        children: [
+          TextField(
+            maxLength: 50,
+            decoration: InputDecoration(
+              label: Text('Title'),
+            ),
+          )
+        ],
+      ),
+    );
   }
 }
