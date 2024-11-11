@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import '../models/expense.dart';
 
@@ -13,6 +14,7 @@ class NewExpense extends StatefulWidget {
 class _NewExpenseState extends State<NewExpense> {
   final _titleController = TextEditingController();
   final _amountController = TextEditingController();
+  Categories _selectedCategory = Categories.leisure;
   DateTime? _selectedDate;
 
   void _presentDatePicker() async {
@@ -87,15 +89,22 @@ class _NewExpenseState extends State<NewExpense> {
           Row(
             children: [
               DropdownButton(
+                  value: _selectedCategory,
                   items: Categories.values
                       .map(
                         (categories) => DropdownMenuItem(
                           value: categories,
-                          child: Text(categories.name),
+                          child: Text(categories.name.toUpperCase()),
                         ),
                       )
                       .toList(),
                   onChanged: (value) {
+                    if(value == null) {
+                      return;
+                    }
+                    setState(() {
+                      _selectedCategory = value;
+                    });
                     print(value);
                   }),
               TextButton(
