@@ -71,7 +71,10 @@ class _NewExpenseState extends State<NewExpense> {
                   mainAxisAlignment: MainAxisAlignment.end,
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
-                    Text(_selectedDate == null ? 'No Date Selected' : formatter.format(_selectedDate!)),  // ! is to force dart to tell that var won't be null
+                    Text(_selectedDate == null
+                        ? 'No Date Selected'
+                        : formatter.format(
+                            _selectedDate!)), // ! is to force dart to tell that var won't be null
                     IconButton(
                       onPressed: _presentDatePicker,
                       icon: const Icon(Icons.calendar_month),
@@ -83,6 +86,18 @@ class _NewExpenseState extends State<NewExpense> {
           ),
           Row(
             children: [
+              DropdownButton(
+                  items: Categories.values
+                      .map(
+                        (categories) => DropdownMenuItem(
+                          value: categories,
+                          child: Text(categories.name),
+                        ),
+                      )
+                      .toList(),
+                  onChanged: (value) {
+                    print(value);
+                  }),
               TextButton(
                 onPressed: () {
                   Navigator.pop(context);
