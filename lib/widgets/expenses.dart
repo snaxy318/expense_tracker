@@ -32,7 +32,9 @@ class _ExpesesState extends State<Expenses> {
     showModalBottomSheet(
       isScrollControlled: true,
       context: context,
-      builder: (ctx) => NewExpense(onAddExpense: _addExpense,),
+      builder: (ctx) => NewExpense(
+        onAddExpense: _addExpense,
+      ),
     );
   }
 
@@ -43,18 +45,33 @@ class _ExpesesState extends State<Expenses> {
   }
 
   void _removeExpense(Expense expense) {
+    final expenseIndex = _registeredExpenses.indexOf(expense);
     setState(() {
       _registeredExpenses.remove(expense);
     });
-    
+
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        duration: const Duration(seconds: 5),
+        content: const Text('Expense deleted.'),
+        action: SnackBarAction(label: 'Undo', onPressed: () {
+          setState(() {
+            _registeredExpenses.insert(expenseIndex,expense);
+          });
+        },),
+      ),
+    );
   }
 
   @override
   Widget build(BuildContext context) {
-    Widget mainContent = const Center(child: Text("There is no expense to show..."),);
+    Widget mainContent = const Center(
+      child: Text("There is no expense to show..."),
+    );
 
-    if(_registeredExpenses.isNotEmpty){
-      mainContent = ExpensesList(expenses: _registeredExpenses,onRemoveExpense: _removeExpense);
+    if (_registeredExpenses.isNotEmpty) {
+      mainContent = ExpensesList(
+          expenses: _registeredExpenses, onRemoveExpense: _removeExpense);
     }
 
     return Scaffold(
