@@ -3,8 +3,9 @@ import 'widgets/expenses.dart';
 
 void main(){
   runApp(
-    const MaterialApp(
-      home: Expenses(),
+    MaterialApp(
+      theme: ThemeData().copyWith(scaffoldBackgroundColor: const Color.fromARGB(255, 146, 86, 249),),
+      home: const  Expenses(),
     ),
   );
 }
