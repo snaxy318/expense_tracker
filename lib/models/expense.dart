@@ -6,7 +6,7 @@ final formatter = DateFormat.yMd();
 
 const uuid = Uuid();
 
-enum Categories {food,travel,leisure,work}
+enum Categories { food, travel, leisure, work }
 
 const categoryIcons = {
   Categories.food: Icons.lunch_dining,
@@ -16,13 +16,12 @@ const categoryIcons = {
 };
 
 class Expense {
-
-  Expense({
-    required this.title,
-    required this.amount,
-    required this.date,
-    required this.category
-  }) : id = uuid.v4();
+  Expense(
+      {required this.title,
+      required this.amount,
+      required this.date,
+      required this.category})
+      : id = uuid.v4();
 
   final String id;
   final String title;
@@ -30,7 +29,8 @@ class Expense {
   final DateTime date;
   final Categories category;
 
-  String get formattedDate {            //It is a getter 
+  String get formattedDate {
+    //It is a getter
     return formatter.format(date);
   }
 }
@@ -41,16 +41,21 @@ class ExpenseBucket {
     required this.expenses,
   });
 
+  ExpenseBucket.toCategory(List<Expense> allExpenses, this.categories)
+      : expenses = allExpenses
+            .where((expense) => expense.category == categories)
+            .toList();
+
   final Categories categories;
   final List<Expense> expenses;
 
-  double get totalExpense{
+  double get totalExpense {
     double sum = 0;
 
-    for(final expense in expenses) {
+    for (final expense in expenses) {
       sum += expense.amount;
     }
-    
+
     return sum;
   }
 }
